@@ -2,7 +2,7 @@ from sklearn import svm
 from sklearn.metrics import classification_report, accuracy_score
 
 def svm_classifier(x_train, x_test, y_train, y_test):
-    svc = svm.SVC(probability=True)
+    svc = svm.SVC(kernel='linear', probability=True)
 
     print("Training...")
     svc.fit(X=x_train, y=y_train)
