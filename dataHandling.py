@@ -4,17 +4,22 @@ from skimage.transform import resize
 from skimage.io import imread
 import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
 
 def load_images_from_directories():
     flat_data_arr = []  # input array
     target_arr = []  # output array
 
     for directory in ['data/AI', 'data/real']:
+        print(f'Loading: {directory}')
+
         for img in os.listdir(directory):
             img_array = imread(os.path.join(directory, img))
             img_resized = resize(img_array, (150, 150, 3))
             flat_data_arr.append(img_resized.flatten())
             target_arr.append(directory)
+
+        print(f'Loaded: {directory}')
 
     flat_data = np.array(flat_data_arr)
     target = np.array(target_arr)
@@ -22,6 +27,9 @@ def load_images_from_directories():
     df = pd.DataFrame(flat_data)
     df['Target'] = target
 
+    df = shuffle(df)
+
+    df = df.head(2000)
     return df
 
 
