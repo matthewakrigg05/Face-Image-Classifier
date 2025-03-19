@@ -29,7 +29,6 @@ def load_images_from_directories():
 
     df = shuffle(df)
 
-    df = df.head(2000)
     return df
 
 
